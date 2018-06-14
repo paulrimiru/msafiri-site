@@ -1,8 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import routes from './Routes/routes';
+import { Route, Redirect, BrowserRouter } from 'react-router-dom';
+
+ReactDOM.render(
+  <BrowserRouter basename={process.env.PUBLIC_URL}>
+    <div>
+      {
+        routes.map((route, index) => (
+          route.exact ?
+          <Route path={route.path} component={route.component} exact/> :
+          <Route path={route.path} component={route.component}/>
+        ))
+      }
+    </div>
+  </BrowserRouter>
+  , document.getElementById('root'));
 registerServiceWorker();
