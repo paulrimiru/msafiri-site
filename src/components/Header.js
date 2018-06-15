@@ -20,7 +20,7 @@ const styles = {
     flexGrow: 1,
   },
   appBar: {
-    padding: 8,
+    padding: 4,
   },
   flex: {
     flex: 1,
@@ -43,11 +43,11 @@ const socialLinks = [
   {description: 'follow us on linkedIn', icon: faLinkedin},
 ]
 
-const ButtonAppBar = (props) => {
+const Header = (props) => {
   const { classes } = props;
   return (
     <div className={classes.root}>
-      <AppBar className={classes.appBar} color='default'>
+      <AppBar className={classes.appBar} color='default' style={{ background: 'transparent', boxShadow: 'none'}} sticky >
         <Toolbar>
           <Hidden mdUp>
           <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
@@ -77,8 +77,8 @@ const ButtonAppBar = (props) => {
   );
 }
 
-ButtonAppBar.propTypes = {
+Header.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(ButtonAppBar);
+export default withStyles(styles)(Header);
