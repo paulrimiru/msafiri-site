@@ -60,6 +60,7 @@ const ButtonAppBar = (props) => {
           <Hidden mdDown>
             { socialLinks.map((account, index) => (
               <Tooltip
+                key={index.toString()}
                 placement='bottom'
                 enterDelay={300}
                 title={account.description}
