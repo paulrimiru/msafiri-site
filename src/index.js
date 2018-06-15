@@ -4,7 +4,7 @@ import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 
 import routes from './Routes/routes';
-import { Route, Redirect, BrowserRouter } from 'react-router-dom';
+import { Route, BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
   <BrowserRouter basename={process.env.PUBLIC_URL}>
