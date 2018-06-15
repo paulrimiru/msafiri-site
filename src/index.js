@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 
 import routes from './Routes/routes';
 import { Route, BrowserRouter } from 'react-router-dom';
+import './styles/scss/material-kit-react.css?v=1.1.0';
 
 ReactDOM.render(
   <BrowserRouter basename={process.env.PUBLIC_URL}>

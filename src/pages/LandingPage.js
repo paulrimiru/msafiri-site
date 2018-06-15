@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import Parallax from 'react-springy-parallax';
 import {
   Typography, Grid, Paper
-} from '@material-ui/core'
+} from '@material-ui/core';
+import Products from '../components/Products';
+import Team from '../components/Team';
 export default class LandingPage extends Component {
   render() {
     return (
@@ -17,7 +19,12 @@ export default class LandingPage extends Component {
           </Grid>
         </Parallax.Layer>
         <Parallax.Layer offset={0.9} speed={0} >
-          <Paper style={styles.pageTwoPaper} elevation={24}/>
+          <Paper style={styles.pageTwoPaper} elevation={24}>
+            <Grid container direction='column'>
+              <Products />
+              <Team />
+            </Grid>
+          </Paper>
         </Parallax.Layer>
       </Parallax>
     )
