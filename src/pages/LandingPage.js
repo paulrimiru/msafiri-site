@@ -1,22 +1,23 @@
 import React, { Component } from 'react'
 import Parallax from 'react-springy-parallax';
 import {
-  Typography, Grid, Paper
+  Grid, Paper
 } from '@material-ui/core';
 import Products from '../components/Products';
 import Team from '../components/Team';
 import WorkContact from '../components/workContact';
+import Footer from '../components/Footer';
 
 export default class LandingPage extends Component {
   render() {
     return (
-      <Parallax ref='parallax' pages={4}>
+      <Parallax ref='parallax' pages={3.6}>
         <Parallax.Layer offset={0} speed={-0.1} style={styles.pageOne} />
         <Parallax.Layer offset={0.45} speed={-0.4}>
           <Grid container direction='column' alignItems='center'>
             <Grid item>
               <h1 style={styles.headline}>Your story begins with us.</h1>
-              <h4 style={styles.description}>Msafiri description goes here</h4>
+              <h4 style={styles.description}>Msafiri solutions description goes here</h4>
             </Grid>
           </Grid>
         </Parallax.Layer>
@@ -28,6 +29,9 @@ export default class LandingPage extends Component {
               <WorkContact />
             </Grid>
           </Paper>
+          <Parallax.Layer>
+            <Footer />
+          </Parallax.Layer>
         </Parallax.Layer>
       </Parallax>
     )
