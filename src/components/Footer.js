@@ -11,7 +11,7 @@ import Favorite from "@material-ui/icons/Favorite";
 
 import footerStyle from '../styles/footerStyle';
 
-function Footer({ ...props }) {
+const Footer = ({ ...props }) => {
   const { classes, whiteFont } = props;
   const footerClasses = classNames({
     [classes.footer]: true,
@@ -46,16 +46,7 @@ function Footer({ ...props }) {
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <a
-                href="http://blog.creative-tim.com/"
-                className={classes.block}
-                target="_blank"
-              >
-                Blog
-              </a>
-            </ListItem>
-            <ListItem className={classes.inlineBlock}>
-              <a
-                href="https://www.creative-tim.com/license"
+                href="#"
                 className={classes.block}
                 target="_blank"
               >

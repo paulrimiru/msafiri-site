@@ -15,7 +15,7 @@ import Check from "@material-ui/icons/Check";
 // core components
 import customInputStyle from '../styles/inputStyle';
 
-function CustomInput({ ...props }) {
+const CustomInput = ({ ...props }) => {
   const {
     classes,
     formControlProps,

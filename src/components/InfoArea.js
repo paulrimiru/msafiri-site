@@ -8,7 +8,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 
 import infoStyle from '../styles/infoStyle';
 
-function InfoArea({ ...props }) {
+const InfoArea = ({ ...props }) => {
   const { classes, title, description, iconColor, vertical } = props;
   const iconWrapper = classNames({
     [classes.iconWrapper]: true,

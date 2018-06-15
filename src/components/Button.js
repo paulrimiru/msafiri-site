@@ -11,7 +11,7 @@ import Button from "@material-ui/core/Button";
 // core components
 import buttonStyle from '../styles/buttonStyle';
 
-function RegularButton({ ...props }) {
+const MyButton = ({ ...props }) => {
   const {
     classes,
     color,
@@ -47,7 +47,7 @@ function RegularButton({ ...props }) {
   );
 }
 
-RegularButton.propTypes = {
+MyButton.propTypes = {
   classes: PropTypes.object.isRequired,
   color: PropTypes.oneOf([
     "primary",
@@ -73,4 +73,4 @@ RegularButton.propTypes = {
   justIcon: PropTypes.bool
 };
 
-export default withStyles(buttonStyle)(RegularButton);
+export default withStyles(buttonStyle)(MyButton);

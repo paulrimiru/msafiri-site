@@ -10,7 +10,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 // core components
 import cardFooterStyle from '../styles/cardStyle';
 
-function CardFooter({ ...props }) {
+const CardFooter = ({ ...props }) => {
   const { classes, className, children, ...rest } = props;
   const cardFooterClasses = classNames({
     [classes.cardFooter]: true,
