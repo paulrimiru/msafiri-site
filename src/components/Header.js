@@ -47,7 +47,7 @@ const Header = (props) => {
   const { classes } = props;
   return (
     <div className={classes.root}>
-      <AppBar className={classes.appBar} color='default' sticky >
+      <AppBar className={classes.appBar} color='default' >
         <Toolbar>
           <Hidden mdUp>
           <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">

@@ -5,10 +5,12 @@ import {
 } from '@material-ui/core';
 import Products from '../components/Products';
 import Team from '../components/Team';
+import WorkContact from '../components/workContact';
+
 export default class LandingPage extends Component {
   render() {
     return (
-      <Parallax ref='parallax' pages={3}>
+      <Parallax ref='parallax' pages={4}>
         <Parallax.Layer offset={0} speed={-0.1} style={styles.pageOne} />
         <Parallax.Layer offset={0.45} speed={-0.4}>
           <Grid container direction='column' alignItems='center'>
@@ -23,6 +25,7 @@ export default class LandingPage extends Component {
             <Grid container direction='column'>
               <Products />
               <Team />
+              <WorkContact />
             </Grid>
           </Paper>
         </Parallax.Layer>
@@ -43,7 +46,7 @@ const styles = {
     justifyContent: 'center'
   },
   pageTwoPaper: {
-    height: 1400,
+    height: 1800,
     margin: 48,
     borderRadius: 5,
   },
