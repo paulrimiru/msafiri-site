@@ -7,7 +7,6 @@ import classNames from "classnames";
 import withStyles from "@material-ui/core/styles/withStyles";
 
 import infoStyle from '../styles/infoStyle';
-import imageStyle from '../styles/infoStyle';
 
 function InfoArea({ ...props }) {
   const { classes, title, description, iconColor, vertical } = props;
