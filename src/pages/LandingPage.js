@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Parallax from 'react-springy-parallax';
 import {
-  Grid, Paper
+  Grid, Paper, Hidden
 } from '@material-ui/core';
 import Products from '../components/Products';
 import Team from '../components/Team';
@@ -11,6 +11,8 @@ import Footer from '../components/Footer';
 export default class LandingPage extends Component {
   render() {
     return (
+      <Grid container>
+      <Hidden mdDown>
       <Parallax ref='parallax' pages={3.6}>
         <Parallax.Layer offset={0} speed={-0.1} style={styles.pageOne} />
         <Parallax.Layer offset={0.45} speed={-0.4}>
@@ -34,6 +36,33 @@ export default class LandingPage extends Component {
           </Parallax.Layer>
         </Parallax.Layer>
       </Parallax>
+      </Hidden>
+      <Hidden mdUp>
+      <Parallax ref='parallax' pages={6}>
+        <Parallax.Layer offset={0} speed={-0.1} style={styles.pageOne} />
+        <Parallax.Layer offset={0.45} speed={-0.4}>
+          <Grid container direction='column' alignItems='center'>
+            <Grid item>
+              <h1 style={styles.headline}>Your story begins with us.</h1>
+              <h4 style={styles.description}>Msafiri solutions description goes here</h4>
+            </Grid>
+          </Grid>
+        </Parallax.Layer>
+        <Parallax.Layer offset={0.9} speed={0} >
+          <Paper >
+            <Grid container direction='column'>
+              <Products />
+              <Team />
+              <WorkContact />
+            </Grid>
+          </Paper>
+          <Parallax.Layer>
+            <Footer />
+          </Parallax.Layer>
+        </Parallax.Layer>
+      </Parallax>
+      </Hidden>
+      </Grid>
     )
   }
 }
