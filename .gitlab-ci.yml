@@ -1,0 +1,91 @@
+image: docker:latest
+
+stages:
+  - build
+  - test
+  - deliver
+  - deploy
+
+cache:
+  paths:
+    - node_modules/
+
+install_dependencies:
+  stage: build
+  image: node:carbon
+  script:
+    - yarn install
+  artifacts:
+    paths:
+      - node_modules/
+
+test_with_lab:
+  stage: test
+  image: node:carbon
+  script: yarn
+  script: yarn install
+  script: yarn test
+
+deliver_to_staging:
+  stage: deliver
+  image: docker:latest
+  services:
+    - docker:dind
+  only:
+    - develop
+  script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker build -t msafiri_staging .
+    - docker tag msafiri_staging paulrimiru/msafiri_staging
+    - docker push paulrimiru/msafiri_staging
+
+deliver_to_production:
+  stage: deliver
+  image: docker:latest
+  services:
+    - docker:dind
+  only:
+    - master
+  script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker build -t msafiri .
+    - docker tag msafiri paulrimiru/msafiri
+    - docker push paulrimiru/msafiri
+deploy_to_staging:
+  stage: deploy
+  image: gitlab/dind:latest
+  only:
+    - "develop"
+  environment: staging
+  services:
+    - docker:dind
+  before_script:
+    - mkdir -p ~/.ssh
+    - echo "$DEPLOY_SERVER_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - eval "$(ssh-agent -s)"
+    - ssh-add <(echo "$DEPLOY_SERVER_PRIVATE_KEY" | base64 --decode)
+    - ssh-keyscan -H $DEPLOY_SERVER_IP >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+  script:
+    - scp -r ./Docker root@${DEPLOY_SERVER_IP}:~/
+    - ssh root@$DEPLOY_SERVER_IP "docker login -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}; docker-compose -f ./Docker/docker-compose.yml down; docker-compose -f ./Docker/docker-compose.yml build --pull; docker-compose -f ./Docker/docker-compose.yml up -d"
+
+deploy_to_production:
+  stage: deploy
+  image: gitlab/dind:latest
+  only:
+    - "master"
+  environment: production
+  services:
+    - docker:dind
+  before_script:
+    - mkdir -p ~/.ssh
+    - echo "$DEPLOY_SERVER_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - eval "$(ssh-agent -s)"
+    - ssh-add ~/.ssh/id_rsa
+    - ssh-keyscan -H $DEPLOY_SERVER_IP >> ~/.ssh/known_hosts
+  script:
+    - scp -r ./Docker root@${DEPLOY_SERVER_IP}:~/
+    - ssh root@$DEPLOY_SERVER_IP "docker login -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}; docker-compose -f ./Docker/docker-compose.yml down; docker-compose -f ./Docker/docker-compose.yml build --pull; docker-compose -f ./Docker/docker-compose.yml up -d"

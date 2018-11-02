@@ -1,0 +1,1 @@
+FROM paulrimiru/msafiri_nginx
